@@ -1,0 +1,50 @@
+From bc3c4218d69b96889bdcc29275b812da0de077ce Mon Sep 17 00:00:00 2001
+From: Jan Chaloupka <jchaloup@redhat.com>
+Date: Thu, 16 Apr 2015 13:39:21 +0200
+Subject: [PATCH] use system lmdb
+
+---
+ cursor.go | 1 +
+ env.go    | 1 +
+ txn.go    | 1 +
+ 3 files changed, 3 insertions(+)
+
+diff --git a/cursor.go b/cursor.go
+index 62e8862..667254f 100644
+--- a/cursor.go
++++ b/cursor.go
+@@ -4,6 +4,7 @@ package mdb
+ #cgo freebsd CFLAGS: -DMDB_DSYNC=O_SYNC
+ #cgo openbsd CFLAGS: -DMDB_DSYNC=O_SYNC
+ #cgo netbsd CFLAGS: -DMDB_DSYNC=O_SYNC
++#cgo LDFLAGS: -llmdb
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include "lmdb.h"
+diff --git a/env.go b/env.go
+index cbeaaba..f978f77 100644
+--- a/env.go
++++ b/env.go
+@@ -4,6 +4,7 @@ package mdb
+ #cgo freebsd CFLAGS: -DMDB_DSYNC=O_SYNC
+ #cgo openbsd CFLAGS: -DMDB_DSYNC=O_SYNC
+ #cgo netbsd CFLAGS: -DMDB_DSYNC=O_SYNC
++#cgo LDFLAGS: -llmdb
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include "lmdb.h"
+diff --git a/txn.go b/txn.go
+index 42df3ed..248f1b7 100644
+--- a/txn.go
++++ b/txn.go
+@@ -4,6 +4,7 @@ package mdb
+ #cgo freebsd CFLAGS: -DMDB_DSYNC=O_SYNC
+ #cgo openbsd CFLAGS: -DMDB_DSYNC=O_SYNC
+ #cgo netbsd CFLAGS: -DMDB_DSYNC=O_SYNC
++#cgo LDFLAGS: -llmdb
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include "lmdb.h"
+-- 
+1.9.3
+
